@@ -1,6 +1,7 @@
 // components/Navbar.jsx
 import { useState } from "react";
 import { Compass, Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";  
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -22,13 +23,13 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <button className="px-4 py-2 rounded-lg border border-[#F7F5F0]/30 text-sm text-[#F7F5F0]">
+          <Link to="/login" className="px-4 py-2 rounded-lg border border-[#F7F5F0]/30 text-sm text-[#F7F5F0]">
             Log In
-          </button>
+          </Link>
 
-          <button className="px-4 py-2 rounded-lg bg-[#1C2B4A] text-[#F7F5F0] text-sm">
+          <Link to="/signup" className="px-4 py-2 rounded-lg bg-[#1C2B4A] text-[#F7F5F0] text-sm">
             Get Started
-          </button>
+          </Link>
         </div>
 
         <button className="md:hidden text-[#F7F5F0]" onClick={() => setOpen(!open)}>
@@ -41,8 +42,12 @@ export default function Navbar() {
           <a href="#">Features</a>
           <a href="#">How It Works</a>
           <a href="#">Mentors</a>
-          <button className="px-4 py-2 rounded-lg border border-[#F7F5F0]/30">Log In</button>
-          <button className="px-4 py-2 rounded-lg bg-[#1C2B4A]">Get Started</button>
+          <Link to="/login" className="px-4 py-2 rounded-lg border border-[#F7F5F0]/30">
+            Log In
+          </Link>
+          <Link to="/signup" className="px-4 py-2 rounded-lg bg-[#1C2B4A]">
+            Get Started
+          </Link>
         </div>
       )}
     </nav>
