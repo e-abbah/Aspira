@@ -1,6 +1,18 @@
 import type { JourneyStep } from '../types/journey';
 
 export const journeySteps: JourneyStep[] = [
+
+    {
+    id: 'assessment',
+    stepNumber: 1,
+    title: 'Complete Compass™ Assessment',
+    description: 'Discover your personalized academic roadmap.',
+    status: 'completed',
+    tasks: [
+      { id: 'take-assessment', label: 'Take the Aspiria Compass™ Assessment', done: true },
+      { id: 'review-roadmap', label: 'Review your personalized roadmap', done: true },
+    ],
+  },
   {
     id: 'documents',
     stepNumber: 2,
