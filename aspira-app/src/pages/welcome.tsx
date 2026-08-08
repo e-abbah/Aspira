@@ -1,15 +1,15 @@
-// pages/Signup.jsx
+// pages/Welcome.jsx
 import AuthLayout from "../components/Auth/AuthLayout";
-import SignupForm from "../components/Auth/SignupForm";
+import WelcomeCard from "../components/Auth/WelcomeCard";
 import Navbar from "../components/home/Navbar";
 
 
-export default function Signup() {
+export default function Welcome() {
   return (
     <>
     <Navbar />
     <AuthLayout>
-      <SignupForm />
+      <WelcomeCard />
     </AuthLayout>
     </>
   );

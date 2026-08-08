@@ -26,6 +26,7 @@ export default function LoginForm() {
             type="email"
             placeholder="you@example.com"
             className="w-full px-4 py-3 rounded-lg border border-[#8A93A6]/30 text-sm focus:outline-none focus:border-[#E0A63C]"
+            required
           />
         </div>
 
@@ -33,6 +34,7 @@ export default function LoginForm() {
           <label className="block text-sm font-medium text-[#121D33] mb-2">Password</label>
           <div className="relative">
             <input
+            required
             type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               className="w-full px-4 py-3 rounded-lg border border-[#8A93A6]/30 text-sm focus:outline-none focus:border-[#E0A63C] pr-10"

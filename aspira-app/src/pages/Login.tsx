@@ -28,11 +28,16 @@
 // pages/Login.jsx
 import AuthLayout from "../components/Auth/AuthLayout";
 import LoginForm from "../components/Auth/LoginForm";
+import Navbar from "../components/home/Navbar";
 
 export default function Login() {
   return (
+    <>
+    <Navbar />
     <AuthLayout>
       <LoginForm />
     </AuthLayout>
+    </>
+     
   );
 }

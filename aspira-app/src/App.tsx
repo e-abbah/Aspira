@@ -1,18 +1,22 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/home/navbar.tsx";
-import Home from "./pages/Home.tsx";
-import Login from "./pages/Login.tsx";
-import Signup from "./pages/Signup.tsx";
+import Navbar from "./components/home/Navbar";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Welcome from "./pages/welcome";
+import DashboardPage from "./pages/Dashboard";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
          <Route path="/signup" element={<Signup />} />
+         <Route path="/signup/welcome" element={<Welcome />} />
+         <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
   );
