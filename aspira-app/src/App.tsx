@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Welcome from "./pages/welcome";
 import DashboardPage from "./pages/Dashboard";
 import Journey from './pages/Journey';
+import Workspace from "./pages/Workspace";
 
 // ...
 
@@ -22,6 +23,7 @@ export default function App() {
          <Route path="/signup/welcome" element={<Welcome />} />
          <Route path="/dashboard" element={<DashboardPage />} />
          <Route path="/journey" element={<Journey/>} />
+         <Route path="/workspace" element= {<Workspace />} />
       </Routes>
     </BrowserRouter>
   );
