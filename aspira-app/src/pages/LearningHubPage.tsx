@@ -31,7 +31,8 @@ export function LearningHubPage() {
   }
 
   return (
-    <DashboardLayout><div className="p-8">
+    <DashboardLayout>
+        <div className="p-8">
       <div>
         <h1 className="text-2xl font-bold text-[#121D33]">Learning Hub</h1>
         <p className="mt-1 text-sm text-[#8A93A6]">Your curated study resources</p>

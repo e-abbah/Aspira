@@ -91,7 +91,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     dashboard: "/dashboard",
     journey: "/journey",
     workspace: "/workspace",
-    learning: "/learning",
+    learning: "/learning-hub",
     opportunities: "/opportunities",
     mentors: "/mentors",
     subscription: "/subscription",
