@@ -8,6 +8,7 @@ import Welcome from "./pages/welcome";
 import DashboardPage from "./pages/Dashboard";
 import Journey from './pages/Journey';
 import Workspace from "./pages/Workspace";
+import { LearningHubPage } from './pages/LearningHubPage';
 
 // ...
 
@@ -24,6 +25,7 @@ export default function App() {
          <Route path="/dashboard" element={<DashboardPage />} />
          <Route path="/journey" element={<Journey/>} />
          <Route path="/workspace" element= {<Workspace />} />
+         <Route path="/learning-hub" element={<LearningHubPage />} />
       </Routes>
     </BrowserRouter>
   );
