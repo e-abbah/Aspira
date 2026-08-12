@@ -12,7 +12,7 @@ const pathToMenuItem: Record<string, MenuItemId> = {
   '/dashboard': 'dashboard',
   '/journey': 'journey',
   '/workspace': 'workspace',
-  '/learning': 'learning',
+  '/learning-hub': 'learning',
   '/opportunities': 'opportunities',
   '/mentors': 'mentors',
   '/subscription': 'subscription',
