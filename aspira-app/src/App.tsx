@@ -4,7 +4,7 @@ import Navbar from "./components/home/Navbar";
 import Home from "./pages/Home.tsx";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Welcome from "./pages/welcome";
+import Welcome from "./pages/Welcome";
 import DashboardPage from "./pages/Dashboard";
 import Journey from './pages/Journey';
 import Workspace from "./pages/Workspace";
