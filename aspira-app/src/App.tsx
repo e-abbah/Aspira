@@ -1,7 +1,7 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/home/Navbar";
-import Home from "./pages/Home";
+import Home from "./pages/Home.tsx";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Welcome from "./pages/welcome";
