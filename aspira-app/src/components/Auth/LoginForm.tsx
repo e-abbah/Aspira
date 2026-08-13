@@ -1,7 +1,7 @@
 // components/login/LoginForm.jsx
 import { useState } from "react";
 import { Compass, Eye, EyeOff, ArrowRight } from "lucide-react";
-
+import {Link} from "react-router-dom"
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -16,8 +16,11 @@ export default function LoginForm() {
 
       <h1 className="font-serif font-bold text-3xl text-[#121D33] mb-2">Welcome Back</h1>
       <p className="text-sm text-[#8A93A6] mb-8">
-        Don't have an account? <a href="/signup" className="underline text-[#121D33]">Sign Up</a>
+        Don't have an account? <Link to="/signup" className="underline text-[#121D33]">
+          Sign Up
+        </Link>
       </p>
+     
 
       <form className="space-y-5">
         <div>
