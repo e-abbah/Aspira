@@ -9,6 +9,7 @@ import DashboardPage from "./pages/Dashboard";
 import Journey from './pages/Journey';
 import Workspace from "./pages/Workspace";
 import { LearningHubPage } from './pages/LearningHubPage';
+import OpportunitiesHub from "./pages/OpportunitesHub.tsx";
 
 
 // ...
@@ -27,7 +28,7 @@ export default function App() {
          <Route path="/journey" element={<Journey/>} />
          <Route path="/workspace" element= {<Workspace />} />
          <Route path="/learning-hub" element={<LearningHubPage />} />
-         {/* </Routes><Route path="/opportunities" element={</>} /> */}
+         <Route path="/opportunities" element={<OpportunitiesHub/>} /> 
       </Routes>
     </BrowserRouter>
   );
