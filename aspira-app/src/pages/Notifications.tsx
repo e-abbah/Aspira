@@ -5,7 +5,7 @@ import { NotificationGroup } from '../components/notifications/NotificationGroup
 import { TabFilter } from '../components/common/TabFilter';
 import { Notification, NotificationTab, TAB_TO_CATEGORY } from '../types/notification';
 import { groupLabelForDate } from '../stats/utils/date';
-
+import DashboardLayout from '../components/dashboard/DashboardLayout';
 const TABS: NotificationTab[] = ['All Resources', 'Roadmaps', 'Deadlines', 'Mentors', 'Opportunities', 'Achievements'];
 
 export default function Notifications() {
@@ -50,7 +50,8 @@ export default function Notifications() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0] p-6 md:p-8">
+    <DashboardLayout>
+          <div className="min-h-screen bg-[#F7F5F0] p-6 md:p-8">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-[#121D33]">Notifications</h1>
         <p className="mt-1 text-sm text-[#8A93A6]">Stay on top of your roadmap, deadlines, and opportunities</p>
@@ -105,5 +106,6 @@ export default function Notifications() {
         )}
       </section>
     </div>
+    </DashboardLayout>
   );
 }

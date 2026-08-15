@@ -12,6 +12,7 @@ import { LearningHubPage } from './pages/LearningHubPage';
 import OpportunitiesHub from "./pages/OpportunitesHub.tsx";
 import Mentors from "./pages/Mentors.tsx";
 import SubscriptionBilling from "./pages/SubscriptionBilling.tsx";
+import Notifications from "./pages/Notifications.tsx";
 
 
 // ...
@@ -33,6 +34,7 @@ export default function App() {
          <Route path="/opportunities" element={<OpportunitiesHub/>} />
          <Route path="/mentors" element={<Mentors/>} />
          <Route path="/subscription" element={<SubscriptionBilling/>} />
+             <Route path="/notifications" element={<Notifications/>} />
       </Routes>
     </BrowserRouter>
   );
