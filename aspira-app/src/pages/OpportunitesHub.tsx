@@ -6,6 +6,7 @@ import { FeaturedMatchCard } from '../components/opportunities/FeaturedMatchedCa
 import { OpportunityListItem } from '../components/opportunities/OpportunityListItem';
 import { CategoryTabs } from '../components/opportunities/CategoryTabs';
 import { SearchAndSortBar } from '../components/opportunities/SearchAndSortBar';
+import DashboardLayout from '../components/dashboard/DashboardLayout';
 
 export default function OpportunitiesHub() {
   const {
@@ -27,7 +28,9 @@ export default function OpportunitiesHub() {
   const stats = useOpportunityStats(opportunities);
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0] p-6 md:p-8">
+    
+    <DashboardLayout>
+      <div className="min-h-screen bg-[#F7F5F0] p-6 md:p-8">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-[#121D33]">Opportunities Hub</h1>
         <p className="mt-1 text-sm text-[#8A93A6]">
@@ -115,5 +118,7 @@ export default function OpportunitiesHub() {
           ))}
       </section>
     </div>
+    </DashboardLayout>
+    
   );
 }
