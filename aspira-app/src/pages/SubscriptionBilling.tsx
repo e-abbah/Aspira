@@ -4,7 +4,7 @@ import { CurrentPlanBanner } from '../components/subscription/CurrentPlanBanner'
 import { BillingCycleToggle } from '../components/subscription/BillingCycleToggle';
 import { PlanCard } from '../components/subscription/PlanCard';
 import { BillingHistoryList } from '../components/subscription/BillingHistoryList';
-
+import DashboardLayout from '../components/dashboard/DashboardLayout';
 export default function SubscriptionBilling() {
   const { plans, subscription, invoices, isLoading, isUpgrading, error, toggleBillingCycle, upgradeTo, refetch } =
     useSubscription();
@@ -43,7 +43,7 @@ export default function SubscriptionBilling() {
   const currentPlan = plans.find((p) => p.id === subscription.currentPlanId)!;
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0] p-6 md:p-8">
+    <DashboardLayout><div className="min-h-screen bg-[#F7F5F0] p-6 md:p-8">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-[#121D33]">Subscription & Billing</h1>
         <p className="mt-1 text-sm text-[#8A93A6]">Manage your Aspiria plan</p>
@@ -83,6 +83,6 @@ export default function SubscriptionBilling() {
       <section>
         <BillingHistoryList invoices={invoices} />
       </section>
-    </div>
+    </div></DashboardLayout>
   );
 }

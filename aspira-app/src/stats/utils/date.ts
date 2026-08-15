@@ -45,3 +45,40 @@ export function formatSessionTime(isoDateTime: string): string {
   if (diffDays === 1) return `Tomorrow, ${time}`;
   return `${date.toLocaleDateString('en-US', { weekday: 'short' })}, ${time}`;
 }
+
+/**
+ * Buckets a timestamp into the section headers this page groups by.
+ */
+export function groupLabelForDate(isoDateTime: string): 'Today' | 'Yesterday' | 'Earlier' {
+  const date = new Date(isoDateTime);
+  const now = new Date();
+
+  const dateOnly = new Date(date);
+  dateOnly.setHours(0, 0, 0, 0);
+  const todayOnly = new Date(now);
+  todayOnly.setHours(0, 0, 0, 0);
+
+  const diffDays = Math.round((todayOnly.getTime() - dateOnly.getTime()) / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return 'Today';
+  if (diffDays === 1) return 'Yesterday';
+  return 'Earlier';
+}
+
+/**
+ * "Just now" / "2 hours ago" / "Yesterday" / "5 days ago" style relative label.
+ */
+export function relativeTimeLabel(isoDateTime: string): string {
+  const date = new Date(isoDateTime);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins} minute${diffMins === 1 ? '' : 's'} ago`;
+  if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+  if (diffDays === 1) return 'Yesterday';
+  return `${diffDays} days ago`;
+}
