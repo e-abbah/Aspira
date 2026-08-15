@@ -10,6 +10,7 @@ import Journey from './pages/Journey';
 import Workspace from "./pages/Workspace";
 import { LearningHubPage } from './pages/LearningHubPage';
 import OpportunitiesHub from "./pages/OpportunitesHub.tsx";
+import Mentors from "./pages/Mentors.tsx";
 
 
 // ...
@@ -28,7 +29,8 @@ export default function App() {
          <Route path="/journey" element={<Journey/>} />
          <Route path="/workspace" element= {<Workspace />} />
          <Route path="/learning-hub" element={<LearningHubPage />} />
-         <Route path="/opportunities" element={<OpportunitiesHub/>} /> 
+         <Route path="/opportunities" element={<OpportunitiesHub/>} />
+         <Route path="/mentors" element={<Mentors/>} />
       </Routes>
     </BrowserRouter>
   );
