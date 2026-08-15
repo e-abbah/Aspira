@@ -10,6 +10,7 @@ import Journey from './pages/Journey';
 import Workspace from "./pages/Workspace";
 import { LearningHubPage } from './pages/LearningHubPage';
 
+
 // ...
 
 
@@ -26,6 +27,7 @@ export default function App() {
          <Route path="/journey" element={<Journey/>} />
          <Route path="/workspace" element= {<Workspace />} />
          <Route path="/learning-hub" element={<LearningHubPage />} />
+         {/* </Routes><Route path="/opportunities" element={</>} /> */}
       </Routes>
     </BrowserRouter>
   );
