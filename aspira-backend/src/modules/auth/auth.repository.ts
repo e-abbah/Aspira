@@ -11,3 +11,11 @@ export const createUser = async (data: {
 }) => {
   return prisma.user.create({ data });
 };
+
+export const saveRefreshToken = async (data: {
+  userId: string;
+  tokenHash: string;
+  expiresAt: Date;
+}) => {
+  return prisma.refreshToken.create({ data });
+};
