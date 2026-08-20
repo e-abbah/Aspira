@@ -1,7 +1,9 @@
 import { findUserByEmail, createUser } from "./auth.repository";
-import { hashPassword } from "../../utils/hash";
+import { comparePassword, hashPassword } from "../../utils/hash";
 import { AppError } from "../../utils/AppError";
 import { SignupInput } from "./auth.schema";
+import bcrypt from "bcrypt";
+
 
 export const signupUser = async (input: SignupInput) => {
   const existingUser = await findUserByEmail(input.email);
@@ -26,3 +28,17 @@ export const signupUser = async (input: SignupInput) => {
     createdAt: user.createdAt,
   };
 };
+
+export const loginUser = async (data: {email: string; password: string}) => {
+  const user = await findUserByEmail(data.email);
+  if (!user) {
+    throw new AppError("Invalid email or password", 401);
+  }
+  const isvalid =await comparePassword(user.passwordHash, data.password);
+  if(!isvalid){
+    throw new AppError("Invalid email or password", 401);
+  }
+  
+}
+  
+
