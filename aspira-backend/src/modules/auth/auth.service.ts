@@ -2,7 +2,9 @@ import { findUserByEmail, createUser } from "./auth.repository";
 import { comparePassword, hashPassword } from "../../utils/hash";
 import { AppError } from "../../utils/AppError";
 import { SignupInput } from "./auth.schema";
-import bcrypt from "bcrypt";
+import { generateAccessToken} from "@/utils/token";
+import { generateRefreshToken } from "@/utils/token";
+
 
 
 export const signupUser = async (input: SignupInput) => {
@@ -30,6 +32,7 @@ export const signupUser = async (input: SignupInput) => {
 };
 
 export const loginUser = async (data: {email: string; password: string}) => {
+  const saltRounds = 10;
   const user = await findUserByEmail(data.email);
   if (!user) {
     throw new AppError("Invalid email or password", 401);
@@ -38,7 +41,16 @@ export const loginUser = async (data: {email: string; password: string}) => {
   if(!isvalid){
     throw new AppError("Invalid email or password", 401);
   }
-  
+
+  //generate token
+  const accessToken = generateAccessToken({userId: user.id});
+  const refreshToken = generateRefreshToken({ userId: user.id });
+
+  const passwordHash = await hashPassword(refreshToken);
+
+
+
+
 }
   
 
