@@ -6,6 +6,7 @@ const REFRESH_TOKEN_SECRET = process.env.JWT_REFRESH_SECRET as string;
 const ACCESS_TOKEN_EXPIRY = "10m";
 const REFRESH_TOKEN_EXPIRY = "2d";
 
+export const REFRESH_TOKEN_EXPIRY_MS = 2 * 24 * 60 * 60 * 1000;
 export interface TokenPayload{
     userId: string
 }

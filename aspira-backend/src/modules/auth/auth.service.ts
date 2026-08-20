@@ -1,10 +1,10 @@
-import { findUserByEmail, createUser } from "./auth.repository";
+import { findUserByEmail, createUser, saveRefreshToken } from "./auth.repository";
 import { comparePassword, hashPassword } from "../../utils/hash";
 import { AppError } from "../../utils/AppError";
 import { SignupInput } from "./auth.schema";
 import { generateAccessToken} from "@/utils/token";
 import { generateRefreshToken } from "@/utils/token";
-
+import { REFRESH_TOKEN_EXPIRY_MS } from "@/utils/token";
 
 
 export const signupUser = async (input: SignupInput) => {
@@ -46,10 +46,24 @@ export const loginUser = async (data: {email: string; password: string}) => {
   const accessToken = generateAccessToken({userId: user.id});
   const refreshToken = generateRefreshToken({ userId: user.id });
 
-  const passwordHash = await hashPassword(refreshToken);
+  const tokenHash = await hashPassword(refreshToken);
+  const expiresAt = new Date(Date.now() + 2 * REFRESH_TOKEN_EXPIRY_MS)
 
+  await saveRefreshToken({
+    userId: user.id,
+    tokenHash,
+    expiresAt
+  });
 
-
+  return {
+    accessToken,
+    refreshToken,
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    },
+  };
 
 }
   
