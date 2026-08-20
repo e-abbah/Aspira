@@ -38,7 +38,7 @@ export const loginUser = async (data: {email: string; password: string}) => {
     throw new AppError("Invalid email or password", 401);
   
   }
-  const isvalid =await comparePassword(user.passwordHash, data.password);
+  const isvalid =await comparePassword(data.password, user.passwordHash);
   if(!isvalid){
     throw new AppError("Invalid email or password", 401);
   }
