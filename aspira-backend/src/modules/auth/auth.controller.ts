@@ -13,7 +13,7 @@ export const signupController = async (
     try {
         const parsed = signupSchema.safeParse(req.body);
 
-    
+
         if (!parsed.success) {
             const errors = parsed.error.issues.map((issue) => ({
                 field: issue.path.join("."),
@@ -38,28 +38,42 @@ export const signupController = async (
 };
 
 export const loginController = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    // 1. Validate
-    const parsed = loginSchema.safeParse(req.body);
+    try {
+        // 1. Validate
+        const parsed = loginSchema.safeParse(req.body);
 
-    if (!parsed.success) {
-      const errors = parsed.error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+        if (!parsed.success) {
+            const errors = parsed.error.issues.map((issue) => ({
+                field: issue.path.join("."),
+                message: issue.message,
+            }));
 
-      return res.status(400).json({
-        message: "Validation failed",
-        errors,
-      });
+            return res.status(400).json({
+                message: "Validation failed",
+                errors,
+            });
+        }
+
+        // 2. Call the service
+        const { accessToken, refreshToken, user } = await loginUser(parsed.data);
+
+        // 3. Set refreshToken as an httpOnly cookie
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days, in ms
+        });
+
+        // 4. Send back accessToken + user — NOT refreshToken
+        return res.status(200).json({
+            message: "Login successful",
+            accessToken,
+            user,
+        });
+
+    } catch (error) {
+        next(error);
     }
-
-    // 2. Call the service
-    const { accessToken, refreshToken, user } = await loginUser(parsed.data);
-
-    // steps 3 and 4 go here next
-
-  } catch (error) {
-    next(error);
-  }
 };
+
