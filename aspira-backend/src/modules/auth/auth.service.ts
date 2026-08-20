@@ -2,9 +2,9 @@ import { findUserByEmail, createUser, saveRefreshToken } from "./auth.repository
 import { comparePassword, hashPassword } from "../../utils/hash";
 import { AppError } from "../../utils/AppError";
 import { SignupInput } from "./auth.schema";
-import { generateAccessToken} from "@/utils/token";
-import { generateRefreshToken } from "@/utils/token";
-import { REFRESH_TOKEN_EXPIRY_MS } from "@/utils/token";
+import { generateAccessToken, generateRefreshToken, REFRESH_TOKEN_EXPIRY_MS} from "../../utils/token";
+// import { generateRefreshToken } from "@/utils/token";
+// import { REFRESH_TOKEN_EXPIRY_MS } from "@/utils/token";
 
 
 export const signupUser = async (input: SignupInput) => {
@@ -36,6 +36,7 @@ export const loginUser = async (data: {email: string; password: string}) => {
   const user = await findUserByEmail(data.email);
   if (!user) {
     throw new AppError("Invalid email or password", 401);
+  
   }
   const isvalid =await comparePassword(user.passwordHash, data.password);
   if(!isvalid){
