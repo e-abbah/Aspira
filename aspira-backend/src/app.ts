@@ -14,6 +14,9 @@ app.use(cookieParser())
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to Aspira backend");
 });
+app.get("/test", (req, res) => {
+  res.status(200).send("TEST ROUTE WORKS");
+});
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
