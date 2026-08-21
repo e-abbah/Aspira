@@ -61,7 +61,7 @@ export const loginController = async (req: Request, res: Response, next: NextFun
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days, in ms
         });
 

@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors"
 import authRoutes from "./modules/auth/auth.routes";
 import { errorHandler } from "./middleware/errorHandler";
 import cookieParser from "cookie-parser";
@@ -7,9 +8,15 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
+const allowedOrigins = [process.env.FRONTEND_URL as string];
 
 app.use(express.json());
 app.use(cookieParser())
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // allows the browser to send/receive cookies
+}));
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to Aspira backend");

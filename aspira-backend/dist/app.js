@@ -12,6 +12,12 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
+app.get("/", (req, res) => {
+    res.status(200).send("Welcome to Aspira backend");
+});
+app.get("/test", (req, res) => {
+    res.status(200).send("TEST ROUTE WORKS");
+});
 app.get("/health", (req, res) => {
     res.json({ status: "ok" });
 });
