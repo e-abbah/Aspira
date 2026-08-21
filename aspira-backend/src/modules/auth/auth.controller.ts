@@ -26,12 +26,20 @@ export const signupController = async (
             });
         }
 
-        const user = await signupUser(parsed.data);
+        const { user, accessToken, refreshToken } = await signupUser(parsed.data);
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            maxAge: 2 * 24 * 60 * 60 * 1000,
+        });
 
         return res.status(201).json({
             message: "Account created successfully",
             user,
+            accessToken,
         });
+
     } catch (err) {
         next(err);
     }
@@ -55,7 +63,7 @@ export const loginController = async (req: Request, res: Response, next: NextFun
         }
 
         // 2. Call the service
-        const { accessToken, refreshToken, user } = await loginUser(parsed.data);
+        const { accessToken, refreshToken } = await loginUser(parsed.data);
 
         // 3. Set refreshToken as an httpOnly cookie
         res.cookie("refreshToken", refreshToken, {
@@ -69,7 +77,7 @@ export const loginController = async (req: Request, res: Response, next: NextFun
         return res.status(200).json({
             message: "Login successful",
             accessToken,
-            user,
+
         });
 
     } catch (error) {
