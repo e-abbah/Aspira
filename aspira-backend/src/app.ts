@@ -11,10 +11,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser())
 
-app.get("/", (req,res) => {
-  res.send("Welcome to Aspira backend")
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to Aspira backend");
 });
-
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
