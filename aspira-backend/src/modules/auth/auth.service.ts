@@ -1,9 +1,9 @@
 // auth.service.ts
-import { findUserByEmail, createUser, saveRefreshToken } from "./auth.repository";
+import { findUserByEmail, createUser, saveRefreshToken, findRefreshTokensByUserId, deleteRefreshTokenById} from "./auth.repository";
 import { comparePassword, hashPassword } from "../../utils/hash";
 import { AppError } from "../../utils/AppError";
 import { SignupInput } from "./auth.schema";
-import { generateAccessToken, generateRefreshToken, REFRESH_TOKEN_EXPIRY_MS } from "../../utils/token";
+import { generateAccessToken, generateRefreshToken, REFRESH_TOKEN_EXPIRY_MS, verifyRefreshToken} from "../../utils/token";
 
 // Shared by signup and login — both need to issue an access token,
 // generate + hash a refresh token, and persist the hash.
@@ -72,4 +72,39 @@ export const loginUser = async (data: { email: string; password: string }) => {
       name: user.name,
     },
   };
+};
+
+export const refreshTokens = async (incomingToken: string) => {
+  let payload;
+  try {
+    payload = verifyRefreshToken(incomingToken);
+  } catch {
+    // signature invalid or token expired at the JWT level
+    throw new AppError("Invalid or expired refresh token", 401);
+  }
+
+  const candidates = await findRefreshTokensByUserId(payload.userId);
+
+  let matchedTokenId: string | null = null;
+  for (const candidate of candidates) {
+    const isMatch = await comparePassword(incomingToken, candidate.tokenHash);
+    if (isMatch) {
+      matchedTokenId = candidate.id;
+      break;
+    }
+  }
+
+  if (!matchedTokenId) {
+    // JWT was valid, but no matching hash in the DB — it's already been
+    // rotated out (reused) or was revoked. Treat as a hard failure.
+    throw new AppError("Refresh token not recognized", 401);
+  }
+
+  // Rotation: destroy the used token before issuing a new one,
+  // so it can never be replayed even if it leaks.
+  await deleteRefreshTokenById(matchedTokenId);
+
+  const { accessToken, refreshToken } = await issueTokens(payload.userId);
+
+  return { accessToken, refreshToken };
 };

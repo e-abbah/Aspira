@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { signupSchema, loginSchema } from "./auth.schema";
-import { loginUser, signupUser } from "./auth.service";
+import { loginUser, refreshTokens, signupUser } from "./auth.service";
 import { AppError } from "@/utils/AppError";
 import { email } from "zod";
 import { hashPassword } from "@/utils/hash";
@@ -85,3 +85,26 @@ export const loginController = async (req: Request, res: Response, next: NextFun
     }
 };
 
+
+export const refreshController = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const incomingToken = req.cookies.refreshToken;
+
+    if (!incomingToken) {
+      return next(new AppError("No refresh token provided", 401));
+    }
+
+    const { accessToken, refreshToken } = await refreshTokens(incomingToken);
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 2 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({ accessToken });
+  } catch (err) {
+    next(err);
+  }
+};
