@@ -173,14 +173,22 @@ export default function SignupForm() {
       setAccessToken(data.accessToken);
       navigate("/dashboard"); // adjust to wherever a logged-in user should land
     } catch (err) {
-      // const message = err.response?.data?.error?.message || "Something went wrong. Please try again.";
-      // setError(message);
       if (axios.isAxiosError(err)) {
-        const message =
-          err.response?.data?.error?.message ||
-          "Something went wrong. Please try again.";
+        const responseData = err.response?.data;
 
-        setError(message);
+        if (responseData?.errors?.length) {
+          // Join all field errors into one readable string, e.g.
+          // "Password must contain an uppercase letter, Password must contain a number"
+          setError(
+            responseData.errors
+              .map((e: { message: string }) => e.message)
+              .join(", "),
+          );
+        } else if (responseData?.message) {
+          setError(responseData.message);
+        } else {
+          setError("Something went wrong. Please try again.");
+        }
       } else {
         setError("Something went wrong. Please try again.");
       }
