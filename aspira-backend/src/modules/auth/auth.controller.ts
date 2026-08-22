@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { signupSchema, loginSchema } from "./auth.schema";
 import { loginUser, refreshTokens, signupUser } from "./auth.service";
-import { AppError } from "@/utils/AppError";
+import { AppError } from "../../utils/AppError";
 import { email } from "zod";
 import { hashPassword } from "@/utils/hash";
 
