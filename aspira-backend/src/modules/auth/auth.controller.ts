@@ -3,7 +3,7 @@ import { signupSchema, loginSchema } from "./auth.schema";
 import { loginUser, refreshTokens, signupUser } from "./auth.service";
 import { AppError } from "../../utils/AppError";
 import { email } from "zod";
-import { hashPassword } from "@/utils/hash";
+import { hashPassword } from "../../utils/hash";
 
 export const signupController = async (
     req: Request,
