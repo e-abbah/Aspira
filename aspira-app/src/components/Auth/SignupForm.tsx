@@ -162,7 +162,7 @@ export default function SignupForm() {
 
     setIsSubmitting(true);
     try {
-      const { data } = await api.post("/api/auth/signup", {
+      const { data } = await api.post("/auth/signup", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
